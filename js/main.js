@@ -2,11 +2,7 @@
 var app = angular.module('fighter-hotseat', []);
 
 app.controller('hotseat', ['$scope', function($scope) {
-    p1 = new Player("Konrad");
-    p2 = new Player("Bob");
-    p3 = new Player("Jim");
-    p4 = new Player("David");
-    $scope.players = [p1, p2, p3, p4];
+    $scope.players = [];
 
     //Index of players 1 and 2.
     //These don't actually need to change.
