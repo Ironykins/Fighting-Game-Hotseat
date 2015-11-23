@@ -38,8 +38,8 @@
                     <p>Current Streak: {{currentStreak}}</p>
                 </div>
 
-                <div class="w3-btn w3-black w3-ripple w3-half" ng-if="hasPlayers()" ng-click="playerWin(1)"><b>{{players[p1i].name}} Wins!</b></div>
-                <div class="w3-btn w3-black w3-ripple w3-half" ng-if="hasPlayers()" ng-click="playerWin(2)"><b>{{players[p2i].name}} Wins!</b></div>
+                <div class="w3-btn w3-black w3-ripple w3-half" ng-if="players.length >= 2" ng-click="playerWin(1)"><b>{{players[p1i].name}} Wins!</b></div>
+                <div class="w3-btn w3-black w3-ripple w3-half" ng-if="players.length >= 2" ng-click="playerWin(2)"><b>{{players[p2i].name}} Wins!</b></div>
 
                 <div class="w3-row">
                     <div class="w3-col m4 l4">

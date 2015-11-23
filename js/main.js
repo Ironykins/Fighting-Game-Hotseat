@@ -70,6 +70,7 @@ app.controller('hotseat', ['$scope', function($scope) {
         $scope.players.forEach(function(player) {
             player.wins = 0;
             player.losses = 0;
+            player.maxStreak = 0;
         });
         $scope.currentStreak = 0;
     }
