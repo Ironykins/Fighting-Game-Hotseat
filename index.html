@@ -30,14 +30,17 @@
                     <h1>Fighting Game Hotseat</h1>
                 </div>
 
+                <div style="text-align:center;" ng-if="players.length < 2">
+                    <p style="font-size:300%;font-family:courier;">Please add at least two players to begin.</p>
+                </div>
 
-                <div style="text-align:center;">
+                <div style="text-align:center;" ng-if="players.length >= 2">
                     <p style="font-size:500%;font-family:courier;">{{players[p1i].name}} vs {{players[p2i].name}}</p>
                     <p>Current Streak: {{currentStreak}}</p>
                 </div>
 
-                <div class="w3-btn w3-black w3-ripple w3-half" ng-click="playerWin(1)"><b>{{players[p1i].name}} Wins!</b></div>
-                <div class="w3-btn w3-black w3-ripple w3-half" ng-click="playerWin(2)"><b>{{players[p2i].name}} Wins!</b></div>
+                <div class="w3-btn w3-black w3-ripple w3-half" ng-if="hasPlayers()" ng-click="playerWin(1)"><b>{{players[p1i].name}} Wins!</b></div>
+                <div class="w3-btn w3-black w3-ripple w3-half" ng-if="hasPlayers()" ng-click="playerWin(2)"><b>{{players[p2i].name}} Wins!</b></div>
 
                 <div class="w3-row">
                     <div class="w3-col m4 l4">
@@ -70,7 +73,10 @@
                         <div class="w3-container w3-black">
                             <h1>Player List</h1>
                         </div>
-                        <table class="w3-table w3-bordered w3-striped w3-border"> 
+                        <div style="text-align:center;" ng-if="players.length < 1">
+                            <p style="font-size:200%;font-family:courier;">No Players yet.</p>
+                        </div>
+                        <table class="w3-table w3-bordered w3-striped w3-border" ng-if="players.length > 0"> 
                             <thead class="w3-dark-grey">
                             <tr>
                                 <th>#</th>
