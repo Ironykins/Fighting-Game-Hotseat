@@ -1,0 +1,114 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>CSUS Fighting Game Hotseat</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/w3.css">
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/model.js"></script>
+        <script src="js/parts.js"></script>
+        <script src="js/main.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Application content here -->
+        <div ng-app="fighter-hotseat">
+            <div ng-controller="hotseat">
+                <div class="w3-container w3-black">
+                    <h1>Fighting Game Hotseat</h1>
+                </div>
+
+
+                <div style="text-align:center;">
+                    <p style="font-size:500%;font-family:courier;">{{players[p1i].name}} vs {{players[p2i].name}}</p>
+                    <p>Current Streak: {{currentStreak}}</p>
+                </div>
+
+                <div class="w3-btn w3-black w3-ripple w3-half" ng-click="playerWin(1)"><b>{{players[p1i].name}} Wins!</b></div>
+                <div class="w3-btn w3-black w3-ripple w3-half" ng-click="playerWin(2)"><b>{{players[p2i].name}} Wins!</b></div>
+
+                <div class="w3-row">
+                    <div class="w3-col m4 l4">
+                        <div class="w3-container w3-black">
+                            <h1>Control</h1>
+                        </div>
+                        <div class="w3-container">
+                            <!-- For adding new Players -->
+                            <h3>Add new Player</h3>
+                            <form novalidate class="simple-form">
+                                Name: <input type="text" ng-model="newName" />
+                                <input class="w3-btn" type="submit" ng-click="addPlayer()" value="Quarters Down!" />
+                            </form>
+
+                            <h3>Game Type</h3>
+                            <label><input type="radio" ng-model="gameType" value="winnerStay">Winner Stays</input></label>
+                            <label><input type="radio" ng-model="gameType" value="loserStay">Loser Stays</input></label> 
+                            <br/>
+                            <label>Max Consecutive Rounds: <input type="number" ng-model="maxRounds" min="0"></input></label>
+                            <br/>
+                            <br/>
+
+                            <button class="w3-btn" ng-click="resetStats()">Reset All Stats</button>
+                            <button class="w3-btn" ng-click="resetAll()">Remove All Players</button>
+
+                        </div>
+
+                    </div>
+                    <div class="w3-col m8 l8">
+                        <div class="w3-container w3-black">
+                            <h1>Player List</h1>
+                        </div>
+                        <table class="w3-table w3-bordered w3-striped w3-border"> 
+                            <thead class="w3-dark-grey">
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Win</th>
+                                <th>Loss</th>
+                                <th>Max Streak</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tr ng-repeat="n in players track by $index">
+                                <td><p>{{$index+1}}</p></td>
+                                <td>{{n.name}}</td>
+                                <td>{{n.wins}}</td>
+                                <td>{{n.losses}}</td>
+                                <td>{{n.maxStreak}}</td>
+                                <td><button class="w3-btn" ng-click="removePlayer($index)">Remove</button></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <!--
+            <footer class="w3-container w3-black">
+                <p>Made by Konrad Aust.</p>
+            </footer> 
+            -->
+        </div>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <!--<script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='https://www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+        </script> -->
+    </body>
+</html>
