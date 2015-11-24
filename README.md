@@ -7,3 +7,5 @@ This webapp aims to fix that problem. Enter everyone's name, and start fighting.
 You can configure it for a variety of turn modes, whether you want to keep the loser in, the winner in, or neither, or if you want to put a cap on how many rounds a winner can play successively. 
 
 This app is built using AngularJS, w3.css, and [HTML5 Boilerplate](https://html5boilerplate.com/).
+
+You can find a demo of the app [here](https://ironykins.github.io/Fighting-Game-Hotseat/index.html).
