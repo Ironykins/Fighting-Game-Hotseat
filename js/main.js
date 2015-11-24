@@ -3,6 +3,10 @@ var app = angular.module('fighter-hotseat', []);
 
 app.controller('hotseat', ['$scope', function($scope) {
     $scope.players = [];
+    $scope.players.push(new Player("Dave"));
+    $scope.players.push(new Player("Josh"));
+    $scope.players.push(new Player("John"));
+    $scope.players.push(new Player("Biff"));
 
     //Index of players 1 and 2.
     //These don't actually need to change.
@@ -35,6 +39,10 @@ app.controller('hotseat', ['$scope', function($scope) {
         winner = player == 1 ? $scope.p1i : $scope.p2i;
         loser = player == 1 ? $scope.p2i : $scope.p1i;
 
+        //Do stats first.
+        $scope.players[winner].wins++;
+        $scope.players[loser].losses++;
+
         if($scope.gameType == "loserStay") {
             temp = winner;
             winner = loser;
@@ -50,8 +58,6 @@ app.controller('hotseat', ['$scope', function($scope) {
         if($scope.players[winner].maxStreak < $scope.currentStreak)
             $scope.players[winner].maxStreak = $scope.currentStreak;
 
-        $scope.players[winner].wins++;
-        $scope.players[loser].losses++;
         $scope.players.push($scope.players[loser]);
 
         //Finished their max streak? Winner switches too.
@@ -59,7 +65,6 @@ app.controller('hotseat', ['$scope', function($scope) {
             $scope.players.push($scope.players[winner]);
             $scope.players.splice(0,1);
             $scope.players.splice(0,1);
-            console.log("derp");
             $scope.currentStreak = 0;
         }
         else

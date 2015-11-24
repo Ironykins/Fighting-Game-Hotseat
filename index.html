@@ -38,8 +38,15 @@
                     <p>Current Streak: {{currentStreak}}</p>
                 </div>
 
+                <div class="w3-container">
+                    <button class="w3-btn w3-black w3-ripple w3-round-large" ng-if="players.length >= 2" ng-click="playerWin(1)">{{players[p1i].name}} Wins!</button>
+                    <button class="w3-btn w3-black w3-ripple w3-round-large" ng-if="players.length >= 2" ng-click="playerWin(2)">{{players[p2i].name}} Wins!</button>
+                </div>
+
+                <!--
                 <div class="w3-btn w3-black w3-ripple w3-half" ng-if="players.length >= 2" ng-click="playerWin(1)"><b>{{players[p1i].name}} Wins!</b></div>
                 <div class="w3-btn w3-black w3-ripple w3-half" ng-if="players.length >= 2" ng-click="playerWin(2)"><b>{{players[p2i].name}} Wins!</b></div>
+                -->
 
                 <div class="w3-row">
                     <div class="w3-col m4 l4">
@@ -48,22 +55,37 @@
                         </div>
                         <div class="w3-container">
                             <!-- For adding new Players -->
-                            <h3>Add new Player</h3>
-                            <form novalidate class="simple-form">
-                                Name: <input type="text" ng-model="newName" />
-                                <input class="w3-btn" type="submit" ng-click="addPlayer()" value="Quarters Down!" />
+                            <b> Add new Player </b>
+                            <form novalidate class="w3-form">
+                                <div class="w3-input-group">
+                                    <label class="w3-label">Name</label>
+                                    <input class="w3-input" type="text" ng-model="newName" />
+                                </div>
+                                <div class="w3-input-group">
+                                    <input class="w3-btn" type="submit" ng-click="addPlayer()" value="Quarters Down!" />
+                                </div>
                             </form>
 
-                            <h3>Game Type</h3>
-                            <label><input type="radio" ng-model="gameType" value="winnerStay">Winner Stays</input></label>
-                            <label><input type="radio" ng-model="gameType" value="loserStay">Loser Stays</input></label> 
-                            <br/>
-                            <label>Max Consecutive Rounds: <input type="number" ng-model="maxRounds" min="0"></input></label>
+                            <div class="w3-input-group">
+                                <b> Game Settings </b><br/>
+                                <input type="radio" class="w3-radio" ng-model="gameType" value="winnerStay">
+                                <label class="w3-validate">
+                                    Winner Stays
+                                </label>
+                                <br/>
+                                <input type="radio" class="w3-radio" ng-model="gameType" value="loserStay">
+                                <label class="w3-validate">
+                                    Loser Stays
+                                </label>
+                                <br/>
+                                <label>Max Consecutive Rounds: <input type="number" ng-model="maxRounds" min="0"></input></label>
+                                <br/>
+                                <button class="w3-btn" ng-click="resetStats()">Reset All Stats</button>
+                                <button class="w3-btn" ng-click="resetAll()">Remove All Players</button>
+                            </div>
                             <br/>
                             <br/>
 
-                            <button class="w3-btn" ng-click="resetStats()">Reset All Stats</button>
-                            <button class="w3-btn" ng-click="resetAll()">Remove All Players</button>
 
                         </div>
 
