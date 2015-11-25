@@ -33,20 +33,17 @@
                     <p style="font-size:300%;font-family:courier;">Please add at least two players to begin.</p>
                 </div>
 
-                <div style="text-align:center;" ng-if="players.length >= 2">
+                <div id="vsBanner" class="w3-animate-top" style="text-align:center;" ng-if="players.length >= 2">
                     <p style="font-size:500%;font-family:courier;">{{players[p1i].name}} vs {{players[p2i].name}}</p>
                     <p>Current Streak: {{currentStreak}}</p>
                 </div>
 
-                <div class="w3-container">
-                    <button class="w3-btn w3-black w3-ripple w3-round-large" ng-if="players.length >= 2" ng-click="playerWin(1)">{{players[p1i].name}} Wins!</button>
-                    <button class="w3-btn w3-black w3-ripple w3-round-large" ng-if="players.length >= 2" ng-click="playerWin(2)">{{players[p2i].name}} Wins!</button>
+                <div class="w3-container w3-half">
+                    <button class="w3-btn w3-black w3-ripple w3-round-large w3-col m12 l12" ng-if="players.length >= 2" ng-click="playerWin(1)">{{players[p1i].name}} Wins!</button>
                 </div>
-
-                <!--
-                <div class="w3-btn w3-black w3-ripple w3-half" ng-if="players.length >= 2" ng-click="playerWin(1)"><b>{{players[p1i].name}} Wins!</b></div>
-                <div class="w3-btn w3-black w3-ripple w3-half" ng-if="players.length >= 2" ng-click="playerWin(2)"><b>{{players[p2i].name}} Wins!</b></div>
-                -->
+                <div class="w3-container w3-half">
+                    <button class="w3-btn w3-black w3-ripple w3-round-large w3-col m12 l12" ng-if="players.length >= 2" ng-click="playerWin(2)">{{players[p2i].name}} Wins!</button>
+                </div>
 
                 <div class="w3-row">
                     <div class="w3-col m4 l4">
@@ -55,16 +52,16 @@
                         </div>
                         <div class="w3-container">
                             <!-- For adding new Players -->
-                            <b> Add new Player </b>
                             <form novalidate class="w3-form">
                                 <div class="w3-input-group">
-                                    <label class="w3-label">Name</label>
+                                    <label class="w3-label">Add Player</label>
                                     <input class="w3-input" type="text" ng-model="newName" />
                                 </div>
                                 <div class="w3-input-group">
-                                    <input class="w3-btn" type="submit" ng-click="addPlayer()" value="Quarters Down!" />
+                                    <input class="w3-btn w3-ripple" type="submit" ng-click="addPlayer()" value="Quarters Down!" />
                                 </div>
                             </form>
+                            <hr/>
 
                             <div class="w3-input-group">
                                 <b> Game Settings </b><br/>
@@ -78,15 +75,17 @@
                                     Loser Stays
                                 </label>
                                 <br/>
-                                <label>Max Consecutive Rounds: <input type="number" ng-model="maxRounds" min="0"></input></label>
+                                <div class="w3-input-group">
+                                    <input type="number" class="w3-input" ng-model="maxRounds" min="0"></input>
+                                    <label class="w3-validate">
+                                        Max Consecutive Rounds: 
+                                    </label>
+                                </div>
                                 <br/>
-                                <button class="w3-btn" ng-click="resetStats()">Reset All Stats</button>
-                                <button class="w3-btn" ng-click="resetAll()">Remove All Players</button>
+
+                                <button class="w3-btn w3-ripple" ng-click="resetStats()">Reset All Stats</button>
+                                <button class="w3-btn w3-ripple" ng-click="resetAll()">Reset Everything</button>
                             </div>
-                            <br/>
-                            <br/>
-
-
                         </div>
 
                     </div>

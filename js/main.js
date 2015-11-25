@@ -3,10 +3,6 @@ var app = angular.module('fighter-hotseat', []);
 
 app.controller('hotseat', ['$scope', function($scope) {
     $scope.players = [];
-    $scope.players.push(new Player("Dave"));
-    $scope.players.push(new Player("Josh"));
-    $scope.players.push(new Player("John"));
-    $scope.players.push(new Player("Biff"));
 
     //Index of players 1 and 2.
     //These don't actually need to change.
@@ -83,5 +79,7 @@ app.controller('hotseat', ['$scope', function($scope) {
     $scope.resetAll = function() {
         $scope.players = [];
         $scope.currentStreak = 0;
+        $scope.gameType = "winnerStay";
+        $scope.maxRounds = 0;
     }
 }]);
