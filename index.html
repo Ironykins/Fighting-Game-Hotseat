@@ -25,7 +25,7 @@
         <!-- Application content here -->
         <div ng-app="fighter-hotseat">
             <div ng-controller="hotseat">
-                <div class="w3-container w3-black">
+                <div class="w3-container w3-black w3-center">
                     <h1>Fighting Game Hotseat</h1>
                 </div>
 
@@ -47,7 +47,7 @@
 
                 <div class="w3-row">
                     <div class="w3-col m4 l4">
-                        <div class="w3-container w3-black">
+                        <div class="w3-container w3-black w3-center">
                             <h1>Control</h1>
                         </div>
                         <div class="w3-container">
@@ -65,13 +65,13 @@
 
                             <div class="w3-input-group">
                                 <b> Game Settings </b><br/>
-                                <input type="radio" class="w3-radio" ng-model="gameType" value="winnerStay">
-                                <label class="w3-validate">
+                                <input id="winStay" type="radio" class="w3-radio" ng-model="gameType" value="winnerStay">
+                                <label for="winStay" class="w3-validate">
                                     Winner Stays
                                 </label>
                                 <br/>
-                                <input type="radio" class="w3-radio" ng-model="gameType" value="loserStay">
-                                <label class="w3-validate">
+                                <input id="loseStay" type="radio" class="w3-radio" ng-model="gameType" value="loserStay">
+                                <label for="loseStay" class="w3-validate">
                                     Loser Stays
                                 </label>
                                 <br/>
@@ -90,32 +90,34 @@
 
                     </div>
                     <div class="w3-col m8 l8">
-                        <div class="w3-container w3-black">
+                        <div class="w3-container w3-black w3-center">
                             <h1>Player List</h1>
                         </div>
-                        <div style="text-align:center;" ng-if="players.length < 1">
-                            <p style="font-size:200%;font-family:courier;">No Players yet.</p>
+                        <div class="w3-container">
+                            <div style="text-align:center;" ng-if="players.length < 1">
+                                <p style="font-size:200%;font-family:courier;">No Players yet.</p>
+                            </div>
+                            <table class="w3-table w3-bordered w3-striped w3-border" ng-if="players.length > 0"> 
+                                <thead class="w3-dark-grey">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Win</th>
+                                    <th>Loss</th>
+                                    <th>Max Streak</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tr ng-repeat="n in players track by $index">
+                                    <td><p>{{$index+1}}</p></td>
+                                    <td>{{n.name}}</td>
+                                    <td>{{n.wins}}</td>
+                                    <td>{{n.losses}}</td>
+                                    <td>{{n.maxStreak}}</td>
+                                    <td><button class="w3-btn" ng-click="removePlayer($index)">Remove</button></td>
+                                </tr>
+                            </table>
                         </div>
-                        <table class="w3-table w3-bordered w3-striped w3-border" ng-if="players.length > 0"> 
-                            <thead class="w3-dark-grey">
-                            <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Win</th>
-                                <th>Loss</th>
-                                <th>Max Streak</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tr ng-repeat="n in players track by $index">
-                                <td><p>{{$index+1}}</p></td>
-                                <td>{{n.name}}</td>
-                                <td>{{n.wins}}</td>
-                                <td>{{n.losses}}</td>
-                                <td>{{n.maxStreak}}</td>
-                                <td><button class="w3-btn" ng-click="removePlayer($index)">Remove</button></td>
-                            </tr>
-                        </table>
                     </div>
                 </div>
 
