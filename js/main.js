@@ -21,8 +21,7 @@ app.controller('hotseat', ['$scope', function($scope) {
     }
 
     //Hax to get event to fire on enter in text box.
-    $scope.newPlayerKeypress = function(event)
-    {
+    $scope.newPlayerKeypress = function(event) {
         if (event.charCode == 13) //if enter then hit the search button
             $scope.addPlayer();
     }
@@ -65,6 +64,12 @@ app.controller('hotseat', ['$scope', function($scope) {
         }
         else
             $scope.players.splice(loser,1);
+    }
+
+    $scope.playerSkip = function(player) {
+        skipper = player == 1 ? $scope.p1i : $scope.p2i;
+        $scope.players.push($scope.players[skipper]);
+        $scope.players.splice(skipper,1);
     }
 
     $scope.resetStats = function() {
