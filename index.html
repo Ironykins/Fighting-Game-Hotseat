@@ -36,25 +36,27 @@
                 <p style="font-size:300%;font-family:courier;">Not enough available players</p>
             </div>
 
-            <div id="vsBanner" class="w3-animate-top" style="text-align:center;" ng-if="player1 != null && player2 != null">
-                <p style="font-size:500%;font-family:courier;">{{player1.name}} vs {{player2.name}}</p>
-                <p>Current Streak: {{lastWinner.streak}}</p>
-            </div>
+            <div ng-if="player1 != null && player2 != null">
+                <div id="vsBanner" class="w3-animate-top" style="text-align:center;">
+                    <p style="font-size:500%;font-family:courier;">{{player1.name}} vs {{player2.name}}</p>
+                    <p>Current Streak: {{lastWinner.streak}}</p>
+                </div>
 
-            <div class="w3-container w3-half">
-                <button class="w3-btn w3-black w3-ripple w3-round-large w3-col m12 l12" ng-if="players.length >= 2" ng-click="playerWin(player1)">{{player1.name}} Wins</button>
-            </div>
+                <div class="w3-container w3-half">
+                    <button class="w3-btn w3-black w3-ripple w3-round-large w3-col m12 l12" ng-click="playerWin(player1)">{{player1.name}} Wins</button>
+                </div>
 
-            <div class="w3-container w3-half">
-                <button class="w3-btn w3-black w3-ripple w3-round-large w3-col m12 l12" ng-if="players.length >= 2" ng-click="playerWin(player2)">{{player2.name}} Wins</button>
-            </div>
+                <div class="w3-container w3-half">
+                    <button class="w3-btn w3-black w3-ripple w3-round-large w3-col m12 l12" ng-click="playerWin(player2)">{{player2.name}} Wins</button>
+                </div>
 
-            <div class="w3-container w3-half">
-                <button class="w3-btn w3-black w3-ripple w3-round-large w3-col m12 l12" ng-if="players.length >= 2" ng-click="playerSkip(player1)">{{player1.name}} Skips</button>
-            </div>
+                <div class="w3-container w3-half">
+                    <button class="w3-btn w3-black w3-ripple w3-round-large w3-col m12 l12" ng-click="playerSkip(player1)">{{player1.name}} Skips</button>
+                </div>
 
-            <div class="w3-container w3-half">
-                <button class="w3-btn w3-black w3-ripple w3-round-large w3-col m12 l12" ng-if="players.length >= 2" ng-click="playerSkip(player2)">{{player2.name}} Skips</button>
+                <div class="w3-container w3-half">
+                    <button class="w3-btn w3-black w3-ripple w3-round-large w3-col m12 l12" ng-click="playerSkip(player2)">{{player2.name}} Skips</button>
+                </div>
             </div>
 
             <div class="w3-row">

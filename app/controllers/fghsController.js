@@ -94,8 +94,10 @@ app.controller('hotseat', ['$scope', function($scope) {
 
     //Prevent the player from getting put in a match
     $scope.deactivatePlayer = function(player) {
-        player.active = !player.active
-        $scope.nextPlayers();
+        player.active = !player.active;
+        if(player == $scope.player1 || player == $scope.player2 || 
+            $scope.player1 == null || $scope.player2 == null)
+            $scope.nextPlayers();
     }
 
     $scope.resetStats = function() {
