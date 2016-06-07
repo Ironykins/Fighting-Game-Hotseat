@@ -8,7 +8,7 @@ var app = angular.module('fighter-hotseat', []);
 // Constructor for a player object.
 function Player(name) {
     this.name = name;
-    this.title = "The Verb Noun";
+    this.title = get_description();
     this.wins = 0;
     this.losses = 0;
     this.draws = 0;
