@@ -15,12 +15,6 @@ app.controller('hotseat', ['$scope', function($scope) {
         $scope.nextPlayers()
     }
 
-    //Hax to get event to fire on enter in text box.
-    $scope.newPlayerKeypress = function(event) {
-        if (event.charCode == 13) //if enter then hit the search button
-            $scope.addPlayer();
-    }
-
     $scope.removePlayer = function(index) {
         $scope.players.splice(index,1);
         $scope.nextPlayers()
@@ -126,6 +120,8 @@ app.controller('hotseat', ['$scope', function($scope) {
         $scope.players = [];
         $scope.gameType = "winnerStay";
         $scope.maxRounds = 0;
+        $scope.player1 = null;
+        $scope.player2 = null;
     }
 
     $scope.addPlayer("Dave");

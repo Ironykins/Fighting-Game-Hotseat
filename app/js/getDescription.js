@@ -6,6 +6,7 @@
  *
  * Distributed under terms of the MIT license.
  */
+
 var adjectives = new Array();
 adjectives.push("Addicting")
 adjectives.push("Afraid")
@@ -747,3 +748,4 @@ function get_description(){
     var thisnoun = Math.floor(Math.random()*(nouns.length));
     return "The " + adjectives[thisadj] + " " + nouns[thisnoun]
 }
+

@@ -8,9 +8,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <!-- Place favicon.ico in the root directory -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/navbar-nonresponsive.css">
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
         <script src="app/js/plugins.js"></script>
@@ -32,17 +33,33 @@
 			<div class="navbar-header">
 			  <a class="navbar-brand" href="#">Fighting Game Hotseat</a>
 			</div>
-			<div id="navbar" class="navbar-toggleable-xs">
+			<div id="navbar" class="collapse navbar-collapse">
 			  <ul class="nav navbar-nav">
-				<li ng-class="{active:showSidebar}"><a ng-click="showSidebar = !showSidebar" href="#">
-				  <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-</a></li>
-				<li><a href="#about">About</a></li>
-				<li><a href="#contact">Contact</a></li>
+				<li ng-class="{active:showSidebar}"><a ng-click="showSidebar = !showSidebar; showAbout = false" href="#">
+				  <span class="glyphicon glyphicon-cog" aria-label="settings"></span></a></li>
+				<li ng-class="{active:showAbout}"><a ng-click="showAbout = !showAbout; showSidebar = false" href="#">
+                  <span class="glyphicon glyphicon-info-sign" aria-label="about"></span></a></li>
+				<li><a ng-click="saveCookie()" href="#">
+                  <span class="glyphicon glyphicon-save" aria-label="about"></span></a></li>
+				<li><a ng-click="loadCookie()" href="#">
+                  <span class="glyphicon glyphicon-open" aria-label="about"></span></a></li>
 			  </ul>
 			</div><!--/.nav-collapse -->
 		  </div>
 		</nav>
+
+        <!-- About/Info Panel -->
+        <div id="about-wrapper" ng-class="{toggled:showAbout}">
+            <div class="about-content">
+                <h2>About</h2>
+                <p>Fighting Game Hotseat is a webapp written by Konrad Aust. You can find me on github <a href="http://github.com/ironykins">here</a>. </p>
+                <p>Starting in 2015, the Computer Science Undergraduate Society (CSUS) at the University of Calgary started playing a lot of fighting games. When enough people were interested, it became difficult to keep track of whose turn it was to play. I wrote this simple app to solve that problem, and I added scorekeeping as an afterthought.</p>
+                <p>Add players below to get started. The current match will be displayed up top, and the list of players down below. You can disable players and they'll be temporarily put out of turn order until they come back. Hit the save and load buttons up top to save or load a configuration. This uses browser cookies.</p>
+                <p>This app is dedicated to everyone in CSUS who wasted time between classes playing Soul Calibur, Skullgirls, Persona 4 Arena, Street Fighter, and Smash Brothers. You guys rock!</p>
+                <p>P.S. The titles mean nothing. They're just there for fun.</p>
+            </div>
+        </div>
+        <!-- end About/Info Panel -->
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper" ng-class="{toggled:showSidebar}">
@@ -95,18 +112,26 @@
                     <p class="player1_name">{{player1.name}}</p>
                     <p class="player_title">"{{player1.title}}"</p>
                     <p ng-if="player1.streak > 0">Current Streak: {{player1.streak}}</p>
-
-                    <div class="btn-group" role="group" aria-label="...">
-                      <button class="btn btn-default" ng-click="playerWin(player1)">{{player1.name}} Wins</button>
-                      <button class="btn btn-default" ng-click="playerSkip(player1)">{{player1.name}} Skips</button>
-                    </div>
                 </div>
                 <div class="col-md-4"><p class="vs_text">vs</p></div>
                 <div class="col-md-4">
                     <p class="player2_name">{{player2.name}}</p>
                     <p class="player_title">"{{player2.title}}"</p>
                     <p ng-if="player2.streak > 0">Current Streak: {{player2.streak}}</p>
+                </div>
+                </div>
 
+                <div class="row">
+                <div class="col-sm-4">
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button class="btn btn-default" ng-click="playerWin(player1)">{{player1.name}} Wins</button>
+                      <button class="btn btn-default" ng-click="playerSkip(player1)">{{player1.name}} Skips</button>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <button class="btn btn-default" ng-click="draw()">Draw</button>
+                </div>
+                <div class="col-sm-4">
                     <div class="btn-group" role="group" aria-label="...">
                       <button class="btn btn-default" ng-click="playerWin(player2)">{{player2.name}} Wins</button>
                       <button class="btn btn-default" ng-click="playerSkip(player2)">{{player2.name}} Skips</button>
@@ -115,7 +140,6 @@
                 </div>
 
                 <div>
-                    <button class="btn btn-default" ng-click="draw()">Draw</button>
                 </div>
             </div>
 
@@ -178,8 +202,8 @@
             <footer>
                 <p>&copy; 2016, Konrad Aust</p>
             </footer>
-        </div>
 		<!-- /Main Container -->
+    </div>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <!--<script>
