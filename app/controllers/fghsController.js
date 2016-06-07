@@ -20,13 +20,18 @@ app.controller('hotseat', ['$scope','$cookies',function($scope,$cookies) {
 
     $scope.loadCookie = function() {
         loadedState = $cookies.getObject('savedState');
-        $scope.players = loadedState.playerList;
-        $scope.gameType = loadedState.gameType;
-        $scope.maxRounds = loadedState.maxRounds;
-        $scope.nextPlayers();
+        if (loadedState != undefined) {
+            $scope.players = loadedState.playerList;
+            $scope.gameType = loadedState.gameType;
+            $scope.maxRounds = loadedState.maxRounds;
+            $scope.nextPlayers();
+        }
     }
 
     $scope.addPlayer = function(name) {
+        if(name.length > 15 || name.length == 0)
+            return; // Quietly don't do it. Our View shouldn't allow names this long.
+
         $scope.players.push(new Player(name));
         $scope.newName = "";
         $scope.nextPlayers();
@@ -140,4 +145,7 @@ app.controller('hotseat', ['$scope','$cookies',function($scope,$cookies) {
         $scope.player1 = null;
         $scope.player2 = null;
     }
+
+    //If we have a cookie, may as well load it.
+    $scope.loadCookie();
 }]);

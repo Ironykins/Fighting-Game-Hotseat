@@ -109,33 +109,44 @@
             <div ng-if="player1 != null && player2 != null" id="vsBanner" style="text-align:center;">
 
                 <div class="row">
-                <div class="col-md-4">
-                    <p class="player1_name">{{player1.name}}</p>
+                <div class="col-xs-4">
+                    <!--<p class="player1_name">{{player1.name}}</p>-->
+                    <h1 class="player1_name">{{player1.name}}</h1>
                     <p class="player_title">"{{player1.title}}"</p>
                     <p ng-if="player1.streak > 0">Current Streak: {{player1.streak}}</p>
                 </div>
-                <div class="col-md-4"><p class="vs_text">vs</p></div>
-                <div class="col-md-4">
-                    <p class="player2_name">{{player2.name}}</p>
+                <div class="col-xs-4"><h1 class="vs_text">vs</h1></div>
+                <div class="col-xs-4">
+                    <h1 class="player2_name">{{player2.name}}</h1>
                     <p class="player_title">"{{player2.title}}"</p>
                     <p ng-if="player2.streak > 0">Current Streak: {{player2.streak}}</p>
                 </div>
                 </div>
 
                 <div class="row">
-                <div class="col-sm-4">
+                <div class="col-xs-4">
                     <div class="btn-group" role="group" aria-label="...">
-                      <button class="btn btn-default" ng-click="playerWin(player1)">{{player1.name}} Wins</button>
-                      <button class="btn btn-default" ng-click="playerSkip(player1)">{{player1.name}} Skips</button>
+                      <button class="btn btn-default" ng-click="playerWin(player1)">
+                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="hidden-xs">Win</span>
+                      </button>
+                      <button class="btn btn-default" ng-click="playerSkip(player1)">
+                          <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> <span class="hidden-xs">Skip</span>
+                      </button>
                     </div>
                 </div>
-                <div class="col-sm-4">
-                    <button class="btn btn-default" ng-click="draw()">Draw</button>
+                <div class="col-xs-4">
+                    <button class="btn btn-default" ng-click="draw()">
+                        <span class="glyphicon glyphicon-resize-small" aria-hidden="true"></span> Draw
+                    </button>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-xs-4">
                     <div class="btn-group" role="group" aria-label="...">
-                      <button class="btn btn-default" ng-click="playerWin(player2)">{{player2.name}} Wins</button>
-                      <button class="btn btn-default" ng-click="playerSkip(player2)">{{player2.name}} Skips</button>
+                      <button class="btn btn-default" ng-click="playerWin(player2)">
+                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="hidden-xs">Win</span>
+                      </button>
+                      <button class="btn btn-default" ng-click="playerSkip(player2)">
+                          <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> <span class="hidden-xs">Skip</span>
+                      </button>
                     </div>
                 </div>
                 </div>
@@ -190,9 +201,9 @@
 				</table>
                 <form class="form-inline form-group pull-right">
                   <div class="input-group">
-                    <input type="text" class="form-control" ng-model="newName" placeholder="Player Name">
+                    <input type="text" maxlength="15" class="form-control" ng-model="newName" placeholder="Player Name">
                     <span class="input-group-btn">
-                      <button class="btn btn-default" type="submit" ng-click="addPlayer(newName)">Add</button>
+                      <button class="btn btn-default" type="submit" ng-click="addPlayer(newName)"> Add</button>
                     </span>
                   </div><!-- /input-group -->
                 </form>

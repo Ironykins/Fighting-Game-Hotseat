@@ -22,21 +22,21 @@ body {
 }
 
 .jumbotron .vs_text {
-  font-size: 600%;
+  font-size: 500%;
   font-family: Lucida, Verdana;
   transform: rotate(-20deg) rotateX(28deg) skewX(-32deg);
   -webkit-transition: -webkit-transform .1s ease-out;
 }
 
 .jumbotron .player1_name {
-  font-size: 600%;
+  /*font-size: 600%;*/
   font-family: Lucida, Verdana;
   transform: rotate(-8deg) rotateX(28deg) skewX(-16deg);
   -webkit-transition: -webkit-transform .1s ease-out;
 }
 
 .jumbotron .player2_name {
-  font-size: 600%;
+  /*font-size: 600%;*/
   font-family: Lucida, Verdana;
   transform: rotate(8deg) rotateX(28deg) skewX(24deg);
   -webkit-transition: -webkit-transform .1s ease-out;
@@ -48,6 +48,10 @@ body {
   /*transform: rotate(-20deg) rotateX(28deg) skewX(-32deg);*/
   -webkit-transition: -webkit-transform .1s ease-out;
 }
+
+/*.jumbotron {*/
+    /*height: 250px*/
+/*}*/
 
 /* Sidebar Stuff */
 #sidebar-wrapper {
