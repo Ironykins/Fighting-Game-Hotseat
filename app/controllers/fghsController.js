@@ -9,8 +9,8 @@ app.controller('hotseat', ['$scope', function($scope) {
     $scope.gameType = "winnerStay";
     $scope.maxRounds = 0;
 
-    $scope.addPlayer = function() {
-        $scope.players.push(new Player($scope.newName));
+    $scope.addPlayer = function(name) {
+        $scope.players.push(new Player(name));
         $scope.newName = "";
         $scope.nextPlayers()
     }
@@ -40,6 +40,7 @@ app.controller('hotseat', ['$scope', function($scope) {
         winner.streak++;
         winner.maxStreak = winner.streak > winner.maxStreak ? winner.streak : winner.maxStreak;
         loser.streak = 0;
+        $scope.lastWinner = winner
 
         //Decide who's staying
         if ($scope.gameType == "winnerStay") {
@@ -64,7 +65,17 @@ app.controller('hotseat', ['$scope', function($scope) {
 
         $scope.nextPlayers()
     }
-    
+
+    $scope.draw = function() {
+        //Track Stats
+        $scope.player1.games++;
+        $scope.player2.games++;
+        $scope.player1.draws++;
+        $scope.player2.draws++;
+        $scope.player1.played++;
+        $scope.player2.played++;
+    }
+
     //Get the players for the next match.
     $scope.nextPlayers = function() {
         $scope.player1 = null;
@@ -107,7 +118,7 @@ app.controller('hotseat', ['$scope', function($scope) {
             player.maxStreak = 0;
             player.draws = 0;
             player.games = 0;
-            player.currentStreak = 0;
+            player.streak = 0;
         });
     }
 
@@ -116,4 +127,8 @@ app.controller('hotseat', ['$scope', function($scope) {
         $scope.gameType = "winnerStay";
         $scope.maxRounds = 0;
     }
+
+    $scope.addPlayer("Dave");
+    $scope.addPlayer("John");
+
 }]);

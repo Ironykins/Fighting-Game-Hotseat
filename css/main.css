@@ -21,12 +21,40 @@ body {
   padding-top: 50px;
 }
 
+.jumbotron .vs_text {
+  font-size: 600%;
+  font-family: Lucida, Verdana;
+  transform: rotate(-20deg) rotateX(28deg) skewX(-32deg);
+  -webkit-transition: -webkit-transform .1s ease-out;
+}
+
+.jumbotron .player1_name {
+  font-size: 600%;
+  font-family: Lucida, Verdana;
+  transform: rotate(-8deg) rotateX(28deg) skewX(-16deg);
+  -webkit-transition: -webkit-transform .1s ease-out;
+}
+
+.jumbotron .player2_name {
+  font-size: 600%;
+  font-family: Lucida, Verdana;
+  transform: rotate(8deg) rotateX(28deg) skewX(24deg);
+  -webkit-transition: -webkit-transform .1s ease-out;
+}
+
+.jumbotron .player_title {
+  font-family: Lucida, Verdana;
+  font-style: italic;
+  /*transform: rotate(-20deg) rotateX(28deg) skewX(-32deg);*/
+  -webkit-transition: -webkit-transform .1s ease-out;
+}
+
 /* Sidebar Stuff */
 #sidebar-wrapper {
     z-index: 1000;
     position: fixed;
-    left: 250px;
-    width: 0;
+    left: 0px;
+    width: 250px;
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
@@ -38,7 +66,8 @@ body {
 }
 
 #sidebar-wrapper.toggled {
-    width: 250px;
+    /*width: 250px;*/
+    left: 250px;
 }
 
 .sidebar-content {
@@ -178,12 +207,6 @@ textarea {
    #593a0e
  */
 
-table, th, td {
-    border: 2px solid;
-    padding: 5px;
-    text-align:center;
-}
-
 textarea {
     font-family: courier;
     width: 100%;
@@ -191,48 +214,6 @@ textarea {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-
-.activeTab {
-    font-weight: bold;
-}
-
-a.activeTab:before {
-    content: '[';
-}
-
-a.activeTab:after {
-    content: ']';
-}
-
-.plugInput {
-    width: 15px;
-    text-align: center;
-}
-
-.rotorInput {
-    border: 1px solid;
-    width: 25px;
-    text-align: center;
-}
-
-.enigmaInput {
-    border: 1px solid;
-}
-
-.mainRotors{
-    width: auto;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    white-space: nowrap;
-}
-
-.mainRotors .item {
-    display: inline-block;
-    float: none;
-    width: 100px;
-}
-
-/*table.io {table-layout:fixed; width:65%;}[>Setting the table width is important!<]*/
 
 
 /* ==========================================================================

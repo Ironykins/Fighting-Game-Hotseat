@@ -29,20 +29,13 @@
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 		  <div class="container-fluid">
 			<div class="navbar-header">
-				<button type="button" ng-click="showSidebar = !showSidebar" class="btn btn-default navbar-btn" aria-label="Left Align">
-				  <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-				</button>
-			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			  </button>
 			  <a class="navbar-brand" href="#">Fighting Game Hotseat</a>
 			</div>
-			<div id="navbar" class="collapse navbar-collapse">
+			<div id="navbar" class="navbar-toggleable-xs">
 			  <ul class="nav navbar-nav">
-				<li class="active"><a href="#">Home</a></li>
+				<li ng-class="{active:showSidebar}"><a ng-click="showSidebar = !showSidebar" href="#">
+				  <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+</a></li>
 				<li><a href="#about">About</a></li>
 				<li><a href="#contact">Contact</a></li>
 			  </ul>
@@ -54,12 +47,6 @@
         <div id="sidebar-wrapper" ng-class="{toggled:showSidebar}">
             <div class="sidebar-content">
                 <h2>Configuration</h2>
-                <div class="form-group">
-                  <label for="playerNameInput">Add Player</label>
-                  <input type="text" id="playerNameInput" ng-model="newName" class="form-control" placeholder="Player Name">
-                  <button type="submit" ng-click="addPlayer()" class="btn btn-default">Add Player</button>
-                </div>
-
                 <div class="form-group">
                     <label>Game Type</label>
                     <div class="radio">
@@ -88,7 +75,8 @@
                 </div>
             </div>
         </div>
-        <!-- /#sidebar-wrapper -->
+        <!-- /sidebar -->
+
         <!-- VS Jumbotron -->
 		<div class="jumbotron">
 		  <div class="container">
@@ -100,77 +88,98 @@
             </div>
 
             <div ng-if="player1 != null && player2 != null" id="vsBanner" style="text-align:center;">
-              <p style="font-size:500%;font-family:courier;">{{player1.name}} vs {{player2.name}}</p>
-              <p>Current Streak: {{lastWinner.streak}}</p>
+
+                <div class="row">
+                <div class="col-md-4">
+                    <p class="player1_name">{{player1.name}}</p>
+                    <p class="player_title">"{{player1.title}}"</p>
+                    <p ng-if="player1.streak > 0">Current Streak: {{player1.streak}}</p>
+
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button class="btn btn-default" ng-click="playerWin(player1)">{{player1.name}} Wins</button>
+                      <button class="btn btn-default" ng-click="playerSkip(player1)">{{player1.name}} Skips</button>
+                    </div>
+                </div>
+                <div class="col-md-4"><p class="vs_text">vs</p></div>
+                <div class="col-md-4">
+                    <p class="player2_name">{{player2.name}}</p>
+                    <p class="player_title">"{{player2.title}}"</p>
+                    <p ng-if="player2.streak > 0">Current Streak: {{player2.streak}}</p>
+
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button class="btn btn-default" ng-click="playerWin(player2)">{{player2.name}} Wins</button>
+                      <button class="btn btn-default" ng-click="playerSkip(player2)">{{player2.name}} Skips</button>
+                    </div>
+                </div>
+                </div>
+
+                <div>
+                    <button class="btn btn-default" ng-click="draw()">Draw</button>
+                </div>
             </div>
+
 		  </div>
 		</div>
 		<!-- /VS Jumbotron -->
 
+		<!-- Main Container -->
         <div class="container">
 			<!-- Player List -->
-			<div class="w3-container">
+			<div class="container">
 				<div style="text-align:center;" ng-if="players.length < 1">
 					<p style="font-size:200%;font-family:courier;">No Players yet.</p>
 				</div>
-				<table class="w3-table w3-bordered w3-striped w3-border" ng-if="players.length > 0"> 
-					<thead class="w3-dark-grey">
+				<table class="table" ng-if="players.length > 0"> 
+					<thead>
 					<tr>
 						<th>#</th>
 						<th>Name</th>
 						<th>Win</th>
 						<th>Loss</th>
+                        <th>Draw</th>
 						<th>Max Streak</th>
-						<th>Active</th>
-						<th></th>
-						<th></th>
+						<th>Actions</th>
 					</tr>
 					</thead>
-					<tr ng-repeat="n in players track by $index">
-						<td><p>{{$index+1}}</p></td>
+                    <tr ng-repeat="n in players track by $index" ng-class="{active:!n.active}">
+						<td>{{$index+1}}</td>
 						<td>{{n.name}}</td>
 						<td>{{n.wins}}</td>
 						<td>{{n.losses}}</td>
+						<td>{{n.draws}}</td>
 						<td>{{n.maxStreak}}</td>
-						<td>{{n.active}}</td>
-						<td><button class="w3-btn" ng-click="removePlayer($index)">Remove</button></td>
-						<td><button class="w3-btn" ng-click="deactivatePlayer(n)">Deactivate</button></td>
+                        <td>
+						<div class="form-group">
+						  <div class="btn-group" role="group" aria-label="...">
+							<button type="button" class="btn btn-default" ng-click="removePlayer($index)">
+                                  <span class="glyphicon glyphicon-remove active" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-default" ng-click="deactivatePlayer(n)">{{n.active ? "Deactivate" : "Activate"}}</button>
+						  </div>
+						</div>
+                        </td>
 					</tr>
 				</table>
+                <form class="form-inline form-group pull-right">
+                  <div class="input-group">
+                    <input type="text" class="form-control" ng-model="newName" placeholder="Player Name">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="submit" ng-click="addPlayer(newName)">Add</button>
+                    </span>
+                  </div><!-- /input-group -->
+                </form>
 			</div>
 			<!-- /Player List -->
+
+
+            <hr>
+
+            <footer>
+                <p>&copy; 2016, Konrad Aust</p>
+            </footer>
         </div>
+		<!-- /Main Container -->
 
-<!--
-            <div ng-if="player1 != null && player2 != null">
-                <div id="vsBanner" class="w3-animate-top" style="text-align:center;">
-                    <p style="font-size:500%;font-family:courier;">{{player1.name}} vs {{player2.name}}</p>
-                    <p>Current Streak: {{lastWinner.streak}}</p>
-                </div>
-
-                <div class="w3-container w3-half">
-                    <button class="w3-btn w3-black w3-ripple w3-round-large w3-col m12 l12" ng-click="playerWin(player1)">{{player1.name}} Wins</button>
-                </div>
-
-                <div class="w3-container w3-half">
-                    <button class="w3-btn w3-black w3-ripple w3-round-large w3-col m12 l12" ng-click="playerWin(player2)">{{player2.name}} Wins</button>
-                </div>
-
-                <div class="w3-container w3-half">
-                    <button class="w3-btn w3-black w3-ripple w3-round-large w3-col m12 l12" ng-click="playerSkip(player1)">{{player1.name}} Skips</button>
-                </div>
-
-                <div class="w3-container w3-half">
-                    <button class="w3-btn w3-black w3-ripple w3-round-large w3-col m12 l12" ng-click="playerSkip(player2)">{{player2.name}} Skips</button>
-                </div>
-            </div>
-
-                </div>
-            </div>
-</div>
-        </div>
-
--->
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <!--<script>
             (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
