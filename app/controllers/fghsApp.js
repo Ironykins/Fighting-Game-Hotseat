@@ -3,7 +3,7 @@
  * Author: Konrad Aust, aka Ironykins
  * App Stuff and data structures for fighting game hotseat program
  */
-var app = angular.module('fighter-hotseat', []);
+var app = angular.module('fighter-hotseat', ['ngCookies']);
 
 // Constructor for a player object.
 function Player(name) {

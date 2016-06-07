@@ -1,6 +1,6 @@
 //Let's do this shit.
 
-app.controller('hotseat', ['$scope', function($scope) {
+app.controller('hotseat', ['$scope','$cookies',function($scope,$cookies) {
     $scope.player1 = null;
     $scope.player2 = null;
     $scope.players = [];
@@ -9,15 +9,32 @@ app.controller('hotseat', ['$scope', function($scope) {
     $scope.gameType = "winnerStay";
     $scope.maxRounds = 0;
 
+    $scope.saveCookie = function() {
+        savedState = {
+            'playerList': $scope.players,
+            'gameType': $scope.gameType,
+            'maxRounds': $scope.maxRounds,
+        }
+        $cookies.putObject('savedState', savedState);
+    }
+
+    $scope.loadCookie = function() {
+        loadedState = $cookies.getObject('savedState');
+        $scope.players = loadedState.playerList;
+        $scope.gameType = loadedState.gameType;
+        $scope.maxRounds = loadedState.maxRounds;
+        $scope.nextPlayers();
+    }
+
     $scope.addPlayer = function(name) {
         $scope.players.push(new Player(name));
         $scope.newName = "";
-        $scope.nextPlayers()
+        $scope.nextPlayers();
     }
 
     $scope.removePlayer = function(index) {
         $scope.players.splice(index,1);
-        $scope.nextPlayers()
+        $scope.nextPlayers();
     }
 
     $scope.playerWin = function(winner) {
@@ -123,8 +140,4 @@ app.controller('hotseat', ['$scope', function($scope) {
         $scope.player1 = null;
         $scope.player2 = null;
     }
-
-    $scope.addPlayer("Dave");
-    $scope.addPlayer("John");
-
 }]);
