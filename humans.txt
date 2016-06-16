@@ -3,10 +3,11 @@
 
 # TEAM
 
-    Konrad Aust -- Everything -- konrad.aust@gmail.com
+    Konrad Aust -- Code, Design -- konrad.aust@gmail.com
 
 # TECHNOLOGY COLOPHON
 
     CSS3, HTML5
     Apache Server Configs, jQuery, Modernizr, Normalize.css
+    AngularJS, Bootstrap
 
